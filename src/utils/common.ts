@@ -56,3 +56,23 @@ export function generateRandomString(length: number) {
 
   return randomString;
 }
+
+export function encryptPassword(password: string): string {
+  const secretKey = 'wema-bank'
+  const encryptedString = CryptoJS.AES.encrypt(
+    password,
+    secretKey
+  ).toString();
+
+  return encryptedString;
+}
+
+export function decryptPassword(password: string):string {
+  const secretKey = 'wema-bank';
+
+  const bytes = CryptoJS.AES.decrypt(password, secretKey);
+
+  const originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+  return originalText;
+}

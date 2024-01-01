@@ -105,20 +105,6 @@ const Table: FC<TableProps> = ({
     getSelected && getSelected(selectedRows);
   }, [selectedRows, getSelected]);
 
-  // const handleRowClicks = (event: any, row: any) => {
-  //   const isActionColumn = column.some(
-  //     (col) =>
-  //       (col.accessor === cellType.ACTION ||
-  //         col.accessor === cellType.SELECTION) &&
-  //       event.target.closest(`[data-column="${col.accessor}"]`)
-  //   );
-
-  //   if (isActionColumn || event.target.tagName.toLowerCase() === 'input')
-  //     return;
-
-  //   handleRowClick && handleRowClick(row);
-  // };
-
   const handleSort = (column: string) => {
     if (sortColumn === column) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");

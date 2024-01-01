@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { generateRandomString } from "../../../utils/common";
+import { decryptPassword, generateRandomString } from "../../../utils/common";
 
 toast.configure();
 
@@ -26,7 +26,7 @@ function SignIn() {
     const { email, password } = formData;
     const checkUser = userData.find(
       (item: any) =>
-        item.contact_email_address === email && item.password === password
+        item.contact_email_address === email && decryptPassword(item.password) === password
     );
 
     if (!checkUser) {
@@ -38,7 +38,7 @@ function SignIn() {
       return;
     }
 
-    const token = generateRandomString(32);
+    const token = generateRandomString(103);
 
     localStorage.setItem("user", JSON.stringify(checkUser));
     localStorage.setItem("token", token);

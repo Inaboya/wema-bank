@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../../../components/Modal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { encryptPassword } from "../../../utils/common";
 
 toast.configure();
 
@@ -42,15 +43,17 @@ function SignUp2() {
       password2,
     } = formData;
 
-   const checkEmail = userData.find((item: any) => item.contact_email_address === contact_email_address);
+    const checkEmail = userData.find(
+      (item: any) => item.contact_email_address === contact_email_address
+    );
 
-   if (checkEmail) {
-    toast.error("Email already exists", {
-      position: toast.POSITION.TOP_LEFT,
-      autoClose: 5000,
-    })
-    return;
-   }
+    if (checkEmail) {
+      toast.error("Email already exists", {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: 5000,
+      });
+      return;
+    }
 
     if (
       house_number.length === 0 ||
@@ -86,12 +89,23 @@ function SignUp2() {
         contact_email_address,
         contact_name,
         contact_phone_number,
-        password,
+        password: encryptPassword(password),
       };
 
       userData.push(newObject);
 
       localStorage.setItem("userData", JSON.stringify(userData));
+      setFormData({
+        house_number: "",
+        street: "",
+        city: "",
+        state: "",
+        contact_name: "",
+        contact_phone_number: "",
+        contact_email_address: "",
+        password: "",
+        password2: "",
+      });
       setShowModal(!showModal);
     }
   };
@@ -99,8 +113,6 @@ function SignUp2() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  console.log(userData);
 
   return (
     <div className="w-screen h-full bg-[#F5F6F8] px-4 py-2 lg:px-20 lg:py-8 flex flex-col gap-8 lg:gap-14">
