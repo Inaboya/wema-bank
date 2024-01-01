@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Table from "../../components/Table";
 import {
   buildLoanTableData,
@@ -10,8 +10,26 @@ import { useNavigate } from "react-router-dom";
 function Dashboard() {
   const loading = false;
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("All");
+  const [dataRows, setDataRows] = useState([] as any[]);
 
   const token = localStorage.getItem("token");
+
+  console.log({ verifiersRow, activeTab });
+
+  useEffect(() => {
+   if (activeTab === "Active Verifiers") {
+      setDataRows(verifiersRow.filter((item) => item.status === "Active"));
+    } else if (activeTab === "Pending Verifiers") {
+      setDataRows(
+        verifiersRow.filter((item) => item.status === "Awaiting Approval")
+      );
+    } else if (activeTab === "Deactivated Verifiers") {
+      setDataRows(verifiersRow.filter((item) => item.status === "Deactivated"));
+    } else {
+      setDataRows(verifiersRow)
+    }
+  }, [activeTab]);
 
   useEffect(() => {
     if (!token) navigate("/sign-in");
@@ -24,10 +42,12 @@ function Dashboard() {
     <div className="w-full flex flex-col gap-6">
       <div className="w-full flex flex-col gap-2 lg:flex-row lg:justify-between items-start lg:items-center">
         <select
-          name=""
-          id=""
+          name="activeTab"
+          value={activeTab}
+          onChange={(e) => setActiveTab(e.target.value)}
           className="px-2 py-3 w-full lg:w-[212px] bg-[#fff] rounded-[4px]"
         >
+          <option value=""></option>
           <option value="All">All</option>
           <option value="Active Verifiers">Active Verifiers</option>
           <option value="Pending Verifiers">Pending Verifiers</option>
@@ -87,7 +107,7 @@ function Dashboard() {
       <div className="relative mx-auto h-full w-full">
         <Table
           column={verifiersColumn}
-          data={buildLoanTableData(verifiersRow)}
+          data={buildLoanTableData(dataRows)}
           loading={loading}
           paginate
           pageSize={10}
