@@ -10,11 +10,6 @@ export function buildLoanTableData(datas: any[] = []) {
 
 export const verifiersColumn = [
   {
-    header: '',
-    accessor: 'selection',
-    type: 'selection',
-  },
-  {
     header: "First Name",
     accessor: "firstName",
     type: "string",
