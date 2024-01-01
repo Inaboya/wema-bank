@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Table from "../../components/Table";
 import {
-  buildLoanTableData,
+  buildUserTableData,
   verifiersColumn,
   verifiersRow,
 } from "../../utils/tableBuilders";
@@ -107,7 +107,7 @@ function Dashboard() {
       <div className="relative mx-auto h-full w-full">
         <Table
           column={verifiersColumn}
-          data={buildLoanTableData(dataRows)}
+          data={buildUserTableData(dataRows)}
           loading={loading}
           paginate
           pageSize={10}

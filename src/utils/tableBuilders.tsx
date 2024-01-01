@@ -1,12 +1,13 @@
-export function buildLoanTableData(datas: any[] = []) {
+export function buildUserTableData(datas: any[] = []) {
   return datas?.map((data) => {
     const newData = {
       ...data,
-    };
+    }
 
-    return newData;
-  });
+    return newData
+  })
 }
+
 
 export const verifiersColumn = [
   {
@@ -57,6 +58,7 @@ export const verifiersColumn = [
 
 export const verifiersRow = [
   {
+    selection: "",
     firstName: "Temitope",
     lastName: "Adejumoke",
     phoneNumber: "+234800 000 0000",
