@@ -1,4 +1,3 @@
-import React from 'react'
 import Notifications from './Notifications'
 import UserMenu from './UserMenu'
 

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import BrandLogo from "../UserDashboard/Header/BrandLogo";
 
 interface SidebarOptions {
   sidebarOpen: boolean;
