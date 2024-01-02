@@ -106,6 +106,7 @@ function CSSTransition({
         }
       }}
     >
+      { /* @ts-ignore */}
       <Component ref={nodeRef} {...rest} style={{ display: !removeFromDom ? 'none' : 'initial' }}>
         {children}
       </Component>
@@ -134,7 +135,7 @@ function Transition({ show, appear, ...rest }: TransitionProps) {
     )
   }
 
-  const contextValue = React.useMemo(
+  const contextValue: TransitionContextType = React.useMemo(
     () => ({
       parent: {
         show,
@@ -142,8 +143,9 @@ function Transition({ show, appear, ...rest }: TransitionProps) {
         appear,
       },
     }),
-    [show]
+    [show, isInitialRender, appear]
   )
+  
 
   return (
     <TransitionContext.Provider value={contextValue}>
