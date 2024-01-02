@@ -251,6 +251,7 @@ function SignUp1() {
                   onChange={handleChange}
                   className="w-full rounded-[4px] border border-[#ccc] p-2"
                 >
+                  <option value=""></option>
                   <option value="Type A">Type A</option>
                   <option value="Type B">Type B</option>
                 </select>
