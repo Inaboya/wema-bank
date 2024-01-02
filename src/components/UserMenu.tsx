@@ -1,21 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Transition from "./Transition";
-import userAvatar from "../assets/images/userAvatar.png";
 
 interface Align {
   align: string;
 }
 
 function UserMenu({ align }: Align) {
-  const user = JSON.parse(localStorage.getItem('user') as string)
+  const user = JSON.parse(localStorage.getItem("user") as string);
 
-  console.log({user})
+  console.log({ user });
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const trigger = useRef<HTMLButtonElement | null>(null);
   const dropdown = useRef<HTMLDivElement | null>(null);
-
-
 
   // close on click outside
   useEffect(() => {
@@ -44,7 +41,7 @@ function UserMenu({ align }: Align) {
     return () => document.removeEventListener("keydown", keyHandler);
   });
 
-  const handleLogout = () => localStorage.removeItem('token')
+  const handleLogout = () => localStorage.removeItem("token");
   return (
     <div className="relative inline-flex">
       <button
